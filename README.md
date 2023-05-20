@@ -17,7 +17,7 @@
 2. [爬虫学习-Scrape Center闯关(spa4,spa5,spa6)_spa6.scrape.center_鸣蜩十四的博客-CSDN博客](https://blog.csdn.net/Destiny_one/article/details/121206175)
 3. [新兴爬虫利器 Playwright 的基本用法 | 静觅 (cuiqingcai.com)](https://cuiqingcai.com/36045.html)
 
-## Contributor
+## Contributors
 
 - [Yitong Hu](https://yitong-hu.metattri.com/)
 - [Zehao Xing](https://github.com/Sonaldovski)
