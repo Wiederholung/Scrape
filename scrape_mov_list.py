@@ -40,13 +40,14 @@ def scrape_mov_list():
         # 获取API返回的JSON数据
         mov_list = page.evaluate('() => JSON.parse(document.body.innerText)')
 
-        # 将API返回的JSON数据保存到文件，中文需要指定编码为utf-8
-        with open('mov_list.json', 'w', encoding='utf-8') as f:
-            json.dump(mov_list, f, ensure_ascii=False, indent=2)
-
         browser.close()
+
+        return mov_list
 
 
 if __name__ == '__main__':
     # 运行同步函数
-    scrape_mov_list()
+    m_list = scrape_mov_list()
+    # 将API返回的JSON数据保存到文件，中文需要指定编码为utf-8
+    with open('mov_list.json', 'w', encoding='utf-8') as f:
+        json.dump(m_list, f, ensure_ascii=False, indent=2)
