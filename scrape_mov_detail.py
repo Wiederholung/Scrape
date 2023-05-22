@@ -1,5 +1,6 @@
 import base64
 import hashlib
+import json
 import random
 import time
 from typing import List, Any
@@ -64,10 +65,10 @@ if __name__ == '__main__':
     for key, value in m_info.items():
         print(key + ": ", value)
 
-    # m_list = get_mov_list()
-    # with open('mov_list.json', 'w', encoding='utf-8') as f:
-    #     json.dump(m_list, f, ensure_ascii=False, indent=2)
-    #
-    # all_m_detail = get_all_mov_detail(m_list)
-    # with open('all_mov_detail.json', 'w', encoding='utf-8') as f:
-    #     json.dump(all_m_detail, f, ensure_ascii=False, indent=2)
+    m_list = get_mov_list()
+    with open('mov_list.json', 'w', encoding='utf-8') as f:
+        json.dump(m_list, f, ensure_ascii=False, indent=2)
+
+    all_m_detail = get_all_mov_detail(m_list)
+    with open('all_mov_detail.json', 'w', encoding='utf-8') as f:
+        json.dump(all_m_detail, f, ensure_ascii=False, indent=2)
