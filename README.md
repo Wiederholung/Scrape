@@ -6,7 +6,7 @@
 
 ## 思路
 
-> 详见[报告](doc/report.md)
+> 详见[报告](doc/JavaScript%20逆向爬虫程序设计.md)
 
 1. 学习网站常用数据防护方法（如JavaScript的压缩、混淆技术）
 2. 分析 https://spa6.scrape.center/ 的加密方式
