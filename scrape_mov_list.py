@@ -49,5 +49,5 @@ if __name__ == '__main__':
     # 运行同步函数
     m_list = scrape_mov_list()
     # 将API返回的JSON数据保存到文件，中文需要指定编码为utf-8
-    with open('mov_list.json', 'w', encoding='utf-8') as f:
+    with open('data/mov_list.json', 'w', encoding='utf-8') as f:
         json.dump(m_list, f, ensure_ascii=False, indent=2)
