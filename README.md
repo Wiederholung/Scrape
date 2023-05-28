@@ -8,16 +8,20 @@
 
 > 详见[报告](doc/JavaScript%20逆向爬虫程序设计.md)
 
-1. 学习网站常用数据防护方法（如JavaScript的压缩、混淆技术）
+1. 学习网站常用数据防护方法（如 JavaScript 的压缩、混淆技术）
 2. 分析 https://spa6.scrape.center/ 的加密方式
-3. 使用 Hook 找到加密id；获取详情页 Ajax 的token
+3. 使用 Hook 找到加密 id；获取详情页 Ajax 的 token
 4. 使用 Python 实现详情页爬取
 
 ## 安装
-    
+
 ```bash
 pip install -r requirements.txt
 ```
+
+## 使用
+
+见 [Jyputer Notebook](scrape_mov.ipynb) 或 [源码文件夹](src)
 
 ## 参考
 

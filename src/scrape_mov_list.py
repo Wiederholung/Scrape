@@ -49,7 +49,7 @@ async def main():
     # Run the async function
     m_list = await scrape_mov_list()
     # Save the JSON data returned by the API to a file
-    with open('data/mov_list.json', 'w', encoding='utf-8') as f:
+    with open('../data/mov_list.json', 'w', encoding='utf-8') as f:
         json.dump(m_list, f, ensure_ascii=False, indent=2)
 
 
