@@ -299,7 +299,7 @@ X=SHA1(url/api/movie/encryptID,TimeStamp)
 token=Base64(X,TimeStamp)
 ```
 
-#### 2.3 JS 源码分析获取网站加密 ID
+#### 2.3 JS 代码分析获取网站加密 ID
 
 在电影界面的详情页中，我们发现需要获取电影详情页的 token，而这一段 token 的获取可能需要涉及到网站页面的加密 ID，需要从 URL
 开始进行寻找：
@@ -392,7 +392,7 @@ encryptID=Base64("ef34#teuq0btua#(-57w1q5o5–j@98xygimlyfxs\*-!i-0-mb"+t)
 
 3. 该网站对 JavaScript 代码进行了[**混淆**](<https://en.wikipedia.org/wiki/Obfuscation_(software)>)
 
-因此，我们需要根据 JavaScript 代码逆向解析出 `encrypt_id` 和 `token` 的生成方法（TODO 节已给出），并实现，然后再调用数据接口获取电影详情页信息。
+因此，我们需要根据 JavaScript 代码逆向解析出 `encrypt_id` 和 `token` 的生成方法（见 [token](#22-js-代码分析获取网站-token) 和 [加密id](#23-js-代码分析获取网站加密-id) 生成原理），并实现，然后再调用数据接口获取电影详情页信息。
 
 ### 3.3 实现
 
@@ -426,7 +426,7 @@ urllib3.disable_warnings()
 - `DETAIL_URL`：电影详情 URL
   - `encrypt_id`：电影 id（加密后）
   - `token`：详情页 token
-- `SECRET`：密钥（对应 TODO）
+- `SECRET`：密钥（对应 [加密id生成原理](#23-js-代码分析获取网站加密-id)）
 
 ```python
 INDEX_URL = 'https://spa6.scrape.center/api/movie?limit={limit}&offset={offset}&token={token}'
