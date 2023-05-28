@@ -336,65 +336,63 @@ encryptID=Base64("ef34#teuq0btua#(-57w1q5o5–j@98xygimlyfxs\*-!i-0-mb"+t)
 
 ### 3.2 分析
 
-1. 该电影网站的数据通过 [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)) 加载，电影详情页数据接口 (URL)
+1. 该电影网站的数据通过 [Ajax](<https://en.wikipedia.org/wiki/Ajax_(programming)>) 加载，电影详情页数据接口 (URL)
    的返回值 (JSON) 包含指定电影的全部信息，与电影详情页对应，如上图的右侧所示。该接口有如下结构：
 
-   > <font size=5><font color=#5b9bd5>https</font>://<font color=#ffc000>spa6.scrape.center</font><font color=#70ad47>
-   /api/movie/{encrypt_id}</font>/<font color=#ed7d31>?token={token}</font></font>
+   > <font size=5><font color=#5b9bd5>https</font>://<font color=#ffc000>spa6.scrape.center</font><font color=#70ad47>/api/movie/{encrypt_id}</font>/<font color=#ed7d31>?token={token}</font></font>
    >
    > - <font color=#5b9bd5>**protocol:** https</font>
    > - <font color=#ffc000>**host:** spa6.scrape.center</font>
-   > - <font color=#70ad47>**path:**</font> `encrypt_id` 代表经过**加密**的电影唯一标识符（下称电影的原始唯一标识符为电影
-       id）
+   > - <font color=#70ad47>**path:**</font> `encrypt_id` 代表经过**加密**的电影唯一标识符（下称电影的原始唯一标识符为电影 id）
    > - <font color=#ed7d31>**query:**</font> URL 设有过期策略，这意味着 `token` 具有**时效性**
 
 2. 网站还使用了电影列表的数据接口，该接口的返回值同样是 JSON 格式，包含了指定电影数量和偏移量的**电影 id** 和电影摘要等数据。
    例如 <font color=#ed7d31>query = ?limit=**2**&offset=0&token=NTU...x</font> 的返回值如下：
 
-    ```JSON
-    {
-      "count": 101,
-      "results": [
-        {
-          "id": 1,
-          "name": "霸王别姬",
-          "alias": "Farewell My Concubine",
-          "cover": "https://p0.meituan.net/...c",
-          "categories": ["剧情", "爱情"],
-          "published_at": "1993-07-26",
-          "minute": 171,
-          "score": 9.5,
-          "regions": ["中国内地", "中国香港"]
-        },
-        {
-          "id": 2,
-          "name": "这个杀手不太冷",
-          "alias": "Léon",
-          "cover": "https://p1.meituan.net/movie/...c",
-          "categories": ["剧情", "动作", "犯罪"],
-          "published_at": "1994-09-14",
-          "minute": 110,
-          "score": 9.5,
-          "regions": ["法国"]
-        }
-      ]
-    }
-    ```
+   ```JSON
+   {
+     "count": 101,
+     "results": [
+       {
+         "id": 1,
+         "name": "霸王别姬",
+         "alias": "Farewell My Concubine",
+         "cover": "https://p0.meituan.net/...c",
+         "categories": ["剧情", "爱情"],
+         "published_at": "1993-07-26",
+         "minute": 171,
+         "score": 9.5,
+         "regions": ["中国内地", "中国香港"]
+       },
+       {
+         "id": 2,
+         "name": "这个杀手不太冷",
+         "alias": "Léon",
+         "cover": "https://p1.meituan.net/movie/...c",
+         "categories": ["剧情", "动作", "犯罪"],
+         "published_at": "1994-09-14",
+         "minute": 110,
+         "score": 9.5,
+         "regions": ["法国"]
+       }
+     ]
+   }
+   ```
 
    该接口 (URL) 结构如下：
 
    > <font size=5><font color=#5b9bd5>https</font>://<font color=#ffc000>spa6.scrape.center</font><font color=#70ad47>
-   /api/movie</font>/<font color=#ed7d31>?limit={limit}&offset={offset}&token={token}</font></font>
+   > /api/movie</font>/<font color=#ed7d31>?limit={limit}&offset={offset}&token={token}</font></font>
    >
    > <font color=#ed7d31>**query**</font> 字段有三个参数，分别是：
    >
-   >   - `limit`: 列表中电影数量
-   >   - `offset`: 偏移量
-   >   - `token`: 列表页 token
+   > - `limit`: 列表中电影数量
+   > - `offset`: 偏移量
+   > - `token`: 列表页 token
 
-3. 该网站对 JavaScript 代码进行了[**混淆**](https://en.wikipedia.org/wiki/Obfuscation_(software))
+3. 该网站对 JavaScript 代码进行了[**混淆**](<https://en.wikipedia.org/wiki/Obfuscation_(software)>)
 
-因此，我们需要根据 JavaScript 代码逆向解析出 `encrypt_id` 和 `token` 的生成方法（TODO节已给出），并实现，然后再调用数据接口获取电影详情页信息。
+因此，我们需要根据 JavaScript 代码逆向解析出 `encrypt_id` 和 `token` 的生成方法（TODO 节已给出），并实现，然后再调用数据接口获取电影详情页信息。
 
 ### 3.3 实现
 
@@ -421,12 +419,13 @@ urllib3.disable_warnings()
 
 - `INDEX_URL`：电影列表 URL
 
-    - `limit`：电影数量
-    - `offset`：偏移量
-    - `token`：列表页 token
+  - `limit`：电影数量
+  - `offset`：偏移量
+  - `token`：列表页 token
+
 - `DETAIL_URL`：电影详情 URL
-    - `encrypt_id`：电影 id（加密后）
-    - `token`：详情页 token
+  - `encrypt_id`：电影 id（加密后）
+  - `token`：详情页 token
 - `SECRET`：密钥（对应 TODO）
 
 ```python
