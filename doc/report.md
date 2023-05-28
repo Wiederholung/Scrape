@@ -156,7 +156,7 @@ token: 'NTIwM2E0MTJiYzk1OTU1NDRjMWE5OGFhMzQyYTI5ODcwNzJmYWZiZiwxNjg1MjY1ODYx'
 
 ##### 方法
 
-1. 获取 token
+1. 获取 `token`
 2. 构造 URL：limit=10, offset=0, token=`token`
 3. 获取 URL 的 response ，提取电影总数
 4. 根据电影总数构造新的 URL：limit=`mov_count`, offset=0, token=`token`
@@ -283,8 +283,8 @@ print(mov_list)
 
 ##### 方法
 
-1. 将电影 id 与密钥 `SECRET` 拼接后进行 base64 编码，得到加密后的电影 id
-2. 根据 path "/api/movie/`encrypt_id`" 获取 `token`
+1. 将电影 id 与密钥 `SECRET` 拼接后进行 base64 编码，得到 `encrypt_id`
+2. 根据 path '/api/movie/`encrypt_id`' 获取 `token`
 3. 根据加密 id 和 `token` 构造新的 URL
 4. 接收新的 URL 的 response ，提取 JSON 格式的电影详情
 5. 返回电影详情
