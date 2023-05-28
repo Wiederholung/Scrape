@@ -6,10 +6,18 @@
 
 ## 思路
 
+> 详见[报告](doc/report.md)
+
 1. 学习网站常用数据防护方法（如JavaScript的压缩、混淆技术）
 2. 分析 https://spa6.scrape.center/ 的加密方式
 3. 使用 Hook 找到加密id；获取详情页 Ajax 的token
 4. 使用 Python 实现详情页爬取
+
+## 安装
+    
+```bash
+pip install -r requirements.txt
+```
 
 ## 参考
 
