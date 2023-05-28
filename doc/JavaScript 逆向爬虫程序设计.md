@@ -1,4 +1,12 @@
-# 大数据应用课程报告：JavaScript 逆向爬虫程序设计
+# JavaScript 逆向爬虫程序设计
+
+<center>邢泽浩 胡逸同</center>
+
+## 目录
+
+[TOC]
+
+<div STYLE="page-break-after: always;"></div>
 
 ## 1. 网站常用的数据保护方法
 
@@ -248,6 +256,8 @@ SFTP）进行文件传输。安全的数据库系统提供访问控制、加密�
 SQL 查询，并对用户输入的数据进行过滤，删除或转义可能被误解为 SQL
 代码的特殊字符。通过输入验证和过滤，可以有效防止恶意用户注入特殊字符或脚本来利用系统漏洞进行攻击。为了提高效果，应采用最新的安全技术和工具，定期更新和审查安全策略，并进行安全测试和漏洞扫描，以保护系统免受新型攻击的威胁。通过综合应用这些措施，可以有效减少安全漏洞的风险，确保用户输入的数据的合法性和安全性。
 
+<div STYLE="page-break-after: always;"></div>
+
 ## 2. 分析目标网站的加密方式
 
 #### 2.1 URL 分析
@@ -326,6 +336,8 @@ key 进行了全局的搜索，寻找相关的参数传递方法并进行了逐�
 encryptID=Base64("ef34#teuq0btua#(-57w1q5o5–j@98xygimlyfxs\*-!i-0-mb"+t)
 ```
 
+<div STYLE="page-break-after: always;"></div>
+
 ## 3. 爬虫程序设计
 
 ### 3.1 目标
@@ -393,6 +405,8 @@ encryptID=Base64("ef34#teuq0btua#(-57w1q5o5–j@98xygimlyfxs\*-!i-0-mb"+t)
 3. 该网站对 JavaScript 代码进行了[**混淆**](<https://en.wikipedia.org/wiki/Obfuscation_(software)>)
 
 因此，我们需要根据 JavaScript 代码逆向解析出 `encrypt_id` 和 `token` 的生成方法（见 [token](#22-js-代码分析获取网站-token) 和 [加密id](#23-js-代码分析获取网站加密-id) 生成原理），并实现，然后再调用数据接口获取电影详情页信息。
+
+<div STYLE="page-break-after: always;"></div>
 
 ### 3.3 实现
 
