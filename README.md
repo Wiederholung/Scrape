@@ -1,6 +1,8 @@
 # JavaScript 逆向爬虫程序设计
 
-## 题目：[Python爬虫案例 | Scrape Center](https://scrape.center/) - [spa6](https://spa6.scrape.center/)
+> 北京邮电大学课程 大数据应用开发（2022/23） 小组作业
+
+## 题目：[Python爬虫案例 Scrape Center](https://scrape.center/) - [spa6](https://spa6.scrape.center/)
 
 电影数据网站，数据通过 Ajax 加载，数据接口参数加密且有时间限制，源码经过混淆，适合 JavaScript 逆向分析。
 
