@@ -233,7 +233,7 @@ SHA-256 常用于数据完整性校验、密码存储、数字签名等应用场
 
 我们开始从网站本身的信息进行入手：打开网站，打开检查，查询 URL 与请求信息。
 
-![image-20230528222237062](https://web.metattri.com/i/2023/05/28/647363ae8c49a.png)
+![image-20230528222237062](https://lsky.metattri.com/i/2023/05/28/647363ae8c49a.png)
 
 上图为网站首页的 URL 信息，我们发现请求网址中含有 token 数值。点击进入电影详情界面，发现电影的 request URL 中不仅有 token 数值，还多出来一个加密 ID。
 
@@ -243,23 +243,23 @@ SHA-256 常用于数据完整性校验、密码存储、数字签名等应用场
 
 于是，我们决定对 JS 代码中与 URL 有关的信息进行查找。我们对‘token’字样进行搜查与断点提取，使用 XHR/提取断点方法：
 
-![Snipaste_2023-05-21_20-39-31](https://web.metattri.com/i/2023/05/28/64736400bc7fd.png)
+![Snipaste_2023-05-21_20-39-31](https://lsky.metattri.com/i/2023/05/28/64736400bc7fd.png)
 
 查找到一个名为 `cancelToken` 的方法中，方法中含有 `send` 方法，我们认为其中可能存在相关的信息，于是在 `send` 函数处断下断点重新进行加载：
 
-![Snipaste_2023-05-21_20-40-26](https://web.metattri.com/i/2023/05/28/647364183ab72.png)
+![Snipaste_2023-05-21_20-40-26](https://lsky.metattri.com/i/2023/05/28/647364183ab72.png)
 
 在 `send` 方法下断点后，我们在右侧栈中，对代码进行了排查，寻找是否有可能含有 URL 字段值的参数或方法，最后我们找到了 `onFetchData` 函数，其中很有可能包含对 URL 数值的传递方法。
 
 继续步进方法，我们在接下来的函数中找到 Date 字样，疑似获取了时间戳，并查看到了 'SHA', 'Base64' 等相关加密字符，很可能与加密有关，这段代码很可能就是加密函数的位置所在：
 
-![Snipaste_2023-05-21_20-43-09](https://web.metattri.com/i/2023/05/28/6473643e43fae.png)
+![Snipaste_2023-05-21_20-43-09](https://lsky.metattri.com/i/2023/05/28/6473643e43fae.png)
 
 继续进行逐步的步进检查，发现方法中确实获取了时间戳，还使用 `argument` 方法获取了网站 URL 的 path，并通过逗号与时间戳拼接在了一起。
 
-![Snipaste_2023-05-21_20-46-59](https://web.metattri.com/i/2023/05/28/64736460d9b7e.png)
+![Snipaste_2023-05-21_20-46-59](https://lsky.metattri.com/i/2023/05/28/64736460d9b7e.png)
 
-![Snipaste_2023-05-21_20-47-36](https://web.metattri.com/i/2023/05/28/64736467049a3.png)
+![Snipaste_2023-05-21_20-47-36](https://lsky.metattri.com/i/2023/05/28/64736467049a3.png)
 
 发现方法使用了 SHA1 和 Base64 对字符串进行了编码，而方法中有对时间戳的两次链接，经过分析，我们获取了 token 的编码方法：
 
@@ -279,19 +279,19 @@ token=Base64(X,TimeStamp)
 
 在电影界面的详情页中，我们发现需要获取电影详情页的 token，而这一段 token 的获取可能需要涉及到网站页面的加密 ID，需要从 URL 开始进行寻找：
 
-![Snipaste_2023-05-21_21-09-12](https://web.metattri.com/i/2023/05/28/647364861089f.png)
+![Snipaste_2023-05-21_21-09-12](https://lsky.metattri.com/i/2023/05/28/647364861089f.png)
 
 直接查看 URL，搜索 token，读取堆栈，检查到 `onFetchData` 函数：
 
-![Snipaste_2023-05-21_21-24-51](https://web.metattri.com/i/2023/05/28/647364c3b4314.png)
+![Snipaste_2023-05-21_21-24-51](https://lsky.metattri.com/i/2023/05/28/647364c3b4314.png)
 
 步进了之后我们找到了 Key 的变量值，但是通过排查该变量所在的函数，我们并没有找到来源于 key 参数的数值或传参方法，于是我们采用暴力解决的方法：我们对 key 进行了全局的搜索，寻找相关的参数传递方法并进行了逐一排查。
 
-![Snipaste_2023-05-21_21-24-29](https://web.metattri.com/i/2023/05/28/64736620eb14e.png)
+![Snipaste_2023-05-21_21-24-29](https://lsky.metattri.com/i/2023/05/28/64736620eb14e.png)
 
 最后成功找到了 key 的参数传递方法如上，我们设置断点并步进：
 
-![图片3](https://web.metattri.com/i/2023/05/28/647366b07ee9a.png)
+![图片3](https://lsky.metattri.com/i/2023/05/28/647366b07ee9a.png)
 
 找到了 `encode` 方法，与 Base64 的相关加密方法。最后通过解析方法我们成功找到了 encryptID 的加密方式，为一串加密字符与 ID 变量进行拼接之后，进行了一次 Base64 加密。加密的规则具体用公式表示为：
 
@@ -307,7 +307,7 @@ encryptID=Base64("ef34#teuq0btua#(-57w1q5o5–j@98xygimlyfxs\*-!i-0-mb"+t)
 
 调用网站数据接口，获取电影详情页信息。
 
-<img src="https://web.metattri.com/i/2023/05/28/6473050758982.png" alt="image-20230528153846167" style="zoom:67%;" />
+<img src="https://lsky.metattri.com/i/2023/05/28/6473050758982.png" alt="image-20230528153846167" style="zoom:67%;" />
 
 ### 3.2 分析
 
